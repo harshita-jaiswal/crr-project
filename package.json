@@ -1,0 +1,14 @@
+{
+  "name": "click-n-split-main",
+  "version": "1.0.0",
+  "description": "## Group Members (Github ID) 1. Sarvesh Biradar (sarvesh2910) 2. Pranav Dharamthok (Pranav-PSU) 3. Supreeth Mudduchetty (Supreeth10) 4. Vuddagiri Naga Venkata Sai Tejesh (VnvsTejesh)",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
