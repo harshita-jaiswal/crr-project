@@ -52,16 +52,18 @@ function Homepage(props) {
         style={{
           backgroundImage: `url(${image})`,
           height: "500px",
-        }}></div>
+        }}
+      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{
           marginTop: "-400px",
           background: "hsla(0, 0%, 100%, 0.8)",
           backdropFilter: "blur(30px)",
-        }}>
+        }}
+      >
         <div className="card-body py-5 px-md-5">
-          <div class="row d-flex justify-content-center">
+          <div className="row d-flex justify-content-center">
             <div className="col-8">
               Enter number of people involved in the transaction?
             </div>
@@ -78,7 +80,8 @@ function Homepage(props) {
                   <div className="col-6">
                     <button
                       className="btn btn-info btn-sml mt-3"
-                      onClick={onDone}>
+                      onClick={onDone}
+                    >
                       Done
                     </button>
                   </div>

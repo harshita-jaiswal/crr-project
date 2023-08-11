@@ -66,16 +66,18 @@ function Upload(props) {
         style={{
           backgroundImage: `url(${image})`,
           height: "500px",
-        }}></div>
+        }}
+      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{
           marginTop: "-400px",
           background: "hsla(0, 0%, 100%, 0.8)",
           backdropFilter: "blur(30px)",
-        }}>
+        }}
+      >
         <div className="card-body py-5 px-md-5">
-          <div class="row d-flex justify-content-center">
+          <div className="row d-flex justify-content-center">
             <header className="row">
               <h1 className="App">Upload the picture of the bill</h1>
             </header>
