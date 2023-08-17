@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from "react";
 import image from "../../img/bill.jpg";
+import {URL} from "../../utils";
+import {Link} from "react-router-dom";
 
 function Contri() {
     const [contriData, setContriData] = useState(
@@ -19,6 +21,19 @@ function Contri() {
                 <div className={"contriItem"}>
                     {contriData.map((user) => BuildUserShare(user))}
                 </div>
+
+                <button
+                    style={{
+                        alignSelf:`center`,
+                        width:`150px`,
+
+                    }}
+                    className={'btn btn-info buttonTable'}>
+                    <Link style={{color:'black',textDecoration:'none'}} to={'/'}>
+
+                    Try new Bill
+                    </Link>
+                </button>
             </div>
 
         </div>
@@ -33,7 +48,7 @@ export const BuildUserShare = (user) => {
         ", "
     )}. Your total share is $${user.share.toFixed(2)}`;
     const sendEmail = () => {
-        let url = "http://localhost:3001";
+
         let endPoint = "/clicknsplit/api/send-email";
         console.log(string);
         let data = {
@@ -41,7 +56,7 @@ export const BuildUserShare = (user) => {
             string,
         };
         setLoading(true);
-        fetch(`${url}${endPoint}`, {
+        fetch(`${URL}${endPoint}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

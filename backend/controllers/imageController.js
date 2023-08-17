@@ -4,7 +4,7 @@ const queueId = process.env.QUEUEID;
 const client = new Butler(apiKey);
 const fs = require("fs");
 var multer = require("multer");
-const upload = multer({ dest: process.env.DEFAULT_IMAGE_PATH });
+const upload = multer({ dest: 'img/'});
 
 exports.scanReceipt = (req, res) => {
   let array = [];
@@ -54,8 +54,7 @@ exports.uploadreceipt = (req, res) => {
 
 exports.imageStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    console.log(process.env.NEW);
-    cb(null, process.env.DEFAULT_IMAGE_PATH);
+    cb(null, 'img/');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);

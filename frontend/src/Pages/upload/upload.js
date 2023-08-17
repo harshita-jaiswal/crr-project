@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import image from "../../img/bill.jpg";
-
+import {URL} from "../../utils";
 function Upload(props) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setisLoading] = useState(null);
@@ -18,10 +18,8 @@ function Upload(props) {
 
     console.log(selectedFile);
     let apiEndpoint = "/clicknsplit/api/upload-receipt";
-    // let url = "https://8b4d-2601-1c0-5280-e430-4536-9046-e759-831a.ngrok.io";
-    let url = "http://localhost:3001";
 
-    fetch(url + apiEndpoint, {
+    fetch(URL + apiEndpoint, {
       method: "POST",
       body: formData,
     })

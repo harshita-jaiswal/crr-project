@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import image from "../../img/bill.jpg";
 import { useHistory } from "react-router";
+import {URL} from "../../utils";
 
+
+let a=567
 function Selection(props) {
   const [tableData, setTableData] = useState([]);
   const [personsList, setPersonsList] = useState([]);
@@ -89,7 +92,8 @@ function Selection(props) {
     }
 
     console.log(temp);
-    fetch("http://localhost:3001/clicknsplit/api/split-bill", {
+    let url = `${URL}/clicknsplit/api/split-bill`
+    fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(temp),
@@ -134,6 +138,8 @@ function Selection(props) {
     console.log(data);
     setSelectionData(data);
   };
+
+
 
   useEffect(() => {
     setTableData(JSON.parse(localStorage.getItem("tableData")));

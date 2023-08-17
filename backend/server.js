@@ -45,7 +45,7 @@ app.get("/", function (req, res) {
   res.status(200).send("Hello World!");
 });
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 4000;
 app.listen(port, function () {
   console.log("App is running on port: " + port);
 });

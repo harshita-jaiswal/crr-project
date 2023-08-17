@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import image from "../../img/bill.jpg";
-//correct path needs to be put above
 
 function Homepage(props) {
   const [numberOfPeople, setNumberOfPeople] = useState(0);
@@ -61,12 +60,12 @@ function Homepage(props) {
           backdropFilter: "blur(30px)",
         }}>
         <div className="card-body py-5 px-md-5">
-          <div class="row d-flex justify-content-center">
+          <div className="row d-flex justify-content-center">
             <div className="col-8">
-              Enter number of people involved in the transaction?
+                <label htmlFor="personNumber">Enter number of people involved in the transaction?</label>
             </div>
             <div className="col-4">
-              <input type="number" onChange={onNumberChange} />
+              <input id='personNumber' name='personNumber' type="number" onChange={onNumberChange} />
             </div>
             {numberOfPeople > 0 && (
               <div className="row">

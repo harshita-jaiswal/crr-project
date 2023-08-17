@@ -4,8 +4,8 @@ import image from "../../img/bill.jpg";
 function TablePage() {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [rows, setRows] = useState([]);
-  const [col, setCol] = useState([]);
+  // const [rows, setRows] = useState([]);
+  // const [col, setCol] = useState([]);
   useEffect(() => {
     let data = JSON.parse(localStorage.getItem("tableData"));
     setData(data);
@@ -27,7 +27,7 @@ function TablePage() {
 
   const getColumns = () => {
     let temp = [];
-    for (const [key, value] of Object.entries(data[0])) {
+    for (const [key] of Object.entries(data[0])) {
       temp.push(key.toLocaleUpperCase());
     }
     return temp;
@@ -39,7 +39,7 @@ function TablePage() {
 
   const buildSingleRow = (row) => {
     let temp = [];
-    for (const [key, value] of Object.entries(row)) {
+    for (const [value] of Object.entries(row)) {
       temp.push(<td>{value}</td>);
     }
     return temp;
