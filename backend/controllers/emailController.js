@@ -1,7 +1,7 @@
 exports.sendEmails = (req, res) => {
-  let email = req.body.email;
-  let text = req.body.string;
-  let subject = "Your Purchase Today";
+  let recipientEmail = req.body.email;
+  let emailText = req.body.string;
+  let emailSubject = "Your Purchase Today";
 
   var nodemailer = require("nodemailer");
   var transporter = nodemailer.createTransport({
@@ -12,10 +12,10 @@ exports.sendEmails = (req, res) => {
     },
   });
   const mailOptions = {
-    from: process.env.EMAIL_SENDER_ADDRESS, // sender address
-    to: email, // list of receivers
-    subject: subject, // Subject line
-    html: "<h2>" + text + "</h2>", // plain text body
+    from: process.env.EMAIL_SENDER_ADDRESS, 
+    to: recipientEmail, 
+    subject: emailSubject,
+    html: "<h2>" + emailText + "</h2>", 
   };
   transporter.sendMail(mailOptions, function (err, info) {
     if (err) {
