@@ -7,11 +7,30 @@ const client = new Butler(apiKey);
 const fs = require("fs");
 var multer = require("multer");
 
-exports.scanReceipt = (req, res) => {
-  let extractedData = [];
-  let tempDataArray = [];
-  let responseArray = [];
+function processExtractedData(data, queueId) {
+  const extractedData = [];
+  const tempDataArray = [];
 
+  data.forEach((row) => {
+    const rowData = [];
+    row.cells.forEach((cell) => {
+      rowData.push({ name: cell.columnName, value: cell.value });
+    });
+    tempDataArray.push(rowData);
+  });
+
+  tempDataArray.forEach((data) => {
+    extractedData.push({
+      name: data.find((item) => item.name === "Item Name").value,
+      quantity: data.find((item) => item.name === "Quantity").value,
+      value: data.find((item) => item.name === "Total Price").value,
+    });
+  });
+
+  return extractedData;
+}
+
+exports.scanReceipt = (req, res) => {
   if (req.file.path && typeof req.file.path !== undefined) {
     const fileStream = fs.createReadStream(req.file.path);
 
@@ -21,21 +40,8 @@ exports.scanReceipt = (req, res) => {
         console.log(response);
         const items = response.tables[0].rows;
 
-        items.forEach((row) => {
-          row.cells.forEach((cell) => {
-            extractedData.push({ name: cell.columnName, value: cell.value });
-          });
-          tempDataArray.push(extractedData);
-          extractedData = [];
-        });
+        const responseArray = processExtractedData(items, queueId);
 
-        tempDataArray.forEach((data) => {
-          responseArray.push({
-            name: data.find((item) => item.name === "Item Name").value,
-            quantity: data.find((item) => item.name === "Quantity").value,
-            value: data.find((item) => item.name === "Total Price").value,
-          });
-        });
         console.log(responseArray);
         res.status(200).send(responseArray);
       })
@@ -60,5 +66,8 @@ exports.imageStorage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
+
+
+
 
 
