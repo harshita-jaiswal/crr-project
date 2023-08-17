@@ -4,7 +4,6 @@ import { useHistory } from "react-router";
 import {URL} from "../../utils";
 
 
-let a=567
 function Selection(props) {
   const [tableData, setTableData] = useState([]);
   const [personsList, setPersonsList] = useState([]);
@@ -22,7 +21,7 @@ function Selection(props) {
 
   const getColumns = () => {
     let temp = [];
-    for (const [key, value] of Object.entries(tableData[0])) {
+    for (const [key] of Object.entries(tableData[0])) {
       temp.push(key.toLocaleUpperCase());
     }
     currentIndividual && temp.push("is in?");
@@ -35,7 +34,7 @@ function Selection(props) {
 
   const buildSingleRow = (row) => {
     let temp = [];
-    for (const [key, value] of Object.entries(row)) {
+    for (const [value] of Object.entries(row)) {
       temp.push(<td>{value}</td>);
     }
     currentIndividual &&
