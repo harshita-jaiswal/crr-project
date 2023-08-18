@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import image from "../../img/bill.jpg";
+import image from "../../assets/img/bill.jpg";
 import { useHistory } from "react-router";
 
 function Selection(props) {
@@ -89,7 +89,7 @@ function Selection(props) {
     }
 
     console.log(temp);
-    fetch("http://localhost:3001/clicknsplit/api/split-bill", {
+    fetch("http://localhost:3000/clicknsplit/api/split-bill", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(temp),
@@ -165,14 +165,16 @@ function Selection(props) {
         style={{
           backgroundImage: `url(${image})`,
           height: "500px",
-        }}></div>
+        }}
+      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{
           marginTop: "-450px",
           background: "hsla(0, 0%, 100%, 0.8)",
           backdropFilter: "blur(30px)",
-        }}>
+        }}
+      >
         <div className="card-body py-5 px-md-5">
           <div className="row d-flex justify-content-center">
             <p>
@@ -193,7 +195,8 @@ function Selection(props) {
               <div className="col">
                 <button
                   className="btn btn-info btn-sml"
-                  onClick={createFinalSelectionData}>
+                  onClick={createFinalSelectionData}
+                >
                   Done
                 </button>
                 {/*</Link>*/}

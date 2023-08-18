@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import image from "../../img/bill.jpg";
+import image from "../../assets/img/bill.jpg";
 //correct path needs to be put above
 
 function Homepage(props) {
