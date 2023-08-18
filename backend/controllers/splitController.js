@@ -6,7 +6,6 @@ exports.splitBill = (req, res) => {
   let people = requestData.totalPeopleInvolved;
 
   let No_of_People = requestData.totalPeopleInvolved.length;
-  let Total_bill_amount = requestData.totalBillAmount;
   let obj = [];
   let a = {};
   for (var i = 0; i < No_of_People; i++) {
