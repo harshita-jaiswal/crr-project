@@ -1,28 +1,44 @@
 exports.sendEmails = (req, res) => {
-  let email = req.body.email;
-  let text = req.body.string;
-  let subject = "Your Purchase Today";
+  let receipentEmail = req.body.email;
+  let emailText = req.body.string;
+  let emailSubject = "Your Purchase Today";
 
-  var nodemailer = require("nodemailer");
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_AUTH,
-      pass: process.env.EMAIL_PASSWORD,
-    },
-  });
-  const mailOptions = {
-    from: process.env.EMAIL_SENDER_ADDRESS, // sender address
-    to: email, // list of receivers
-    subject: subject, // Subject line
-    html: "<h2>" + text + "</h2>", // plain text body
+  const nodemailer = require("nodemailer");
+
+  function sendEmail(email, subject, htmlContent, callback) {
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_AUTH,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+  
+    const mailOptions = {
+      from: process.env.EMAIL_SENDER_ADDRESS,
+      to: email,
+      subject: subject,
+      html: htmlContent,
+    };
+  
+    transporter.sendMail(mailOptions, callback);
+  }
+  
+  exports.sendEmails = (req, res) => {
+    const email = req.body.email;
+    const text = req.body.string;
+    const subject = "Your Purchase Today";
+  
+    const htmlContent = `<h2>${text}</h2>`;
+  
+    sendEmail(email, subject, htmlContent, (err, info) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send("Email sending failed");
+      } else {
+        console.log(info);
+        res.status(200).send(info);
+      }
+    });
   };
-  transporter.sendMail(mailOptions, function (err, info) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(info);
-      res.status(200).send(info);
-    }
-  });
-};
+}  

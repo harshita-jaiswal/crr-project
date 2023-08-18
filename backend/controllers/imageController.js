@@ -1,5 +1,4 @@
 const { Butler } = require("butler-sdk");
-
 const apiKey = process.env.APIKEY;
 const queueId = process.env.QUEUEID;
 
@@ -66,8 +65,3 @@ exports.imageStorage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-
-
-
-
-
