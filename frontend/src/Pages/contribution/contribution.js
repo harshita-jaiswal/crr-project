@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_BASEURL, SEND_EMAIL } from "../../utils/url";
 
 function Contri() {
   const [contriData, setContriData] = useState(
@@ -10,7 +11,7 @@ function Contri() {
       className={"contriPage"}
     >
       <div
-        className="card  shadow-5-strong"
+        className="card shadow-5-strong"
         style={{
           background: "hsla(0, 0%, 100%, 0.8)",
           backdropFilter: "blur(30px)",
@@ -19,31 +20,25 @@ function Contri() {
       >
         <h3>Individual Contributions</h3>
         <div className={"contriItem"}>
-          {contriData && contriData.map((user, key) => {
-            <div key={key}>{BuildUserShare(user)}</div>
-          })}
+          {contriData && contriData.map((user, key) => <div key={key}>{BuildUserShare(user)}</div>)}
         </div>
       </div>
     </section>
   );
 }
 
-const BuildUserShare = (user, ind) => {
+const BuildUserShare = (user) => {
 
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState("");
-  let string = `Hi ${user.name}, you purchased ${user.items.join(
-    ", "
-  )}. Your total share is $${user.share.toFixed(2)}`;
+  let message = `Hi ${user.name}, you purchased ${user.items.join(", ")}. Your total share is $${user.share.toFixed(2)}`;
   const sendEmail = () => {
-    let url = "http://localhost:3001";
-    let endPoint = "/clicknsplit/api/send-email";
 
     let data = {
       email,
-      string,
+      message,
     };
-    fetch(`${url}${endPoint}`, {
+    fetch(`${API_BASEURL}${SEND_EMAIL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
