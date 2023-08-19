@@ -7,11 +7,11 @@ function Selection() {
   const [personsList, setPersonsList] = useState([]);
   const [currentIndividual, setCurrentIndividual] = useState(null);
   const [selectionData, setSelectionData] = useState({});
-  let history = useHistory();
+  const history = useHistory();
 
   const getTotalBillAmount = () => {
     let total = 0;
-    let regexcurrency = /[^0-9.-]/gm;
+    const regexcurrency = /[^0-9.-]/gm;
     tableData.forEach((item) => {
       total = total + parseInt(item["value"].replace(regexcurrency, ""), 10);
     });
@@ -19,7 +19,7 @@ function Selection() {
   };
 
   const getColumns = () => {
-    let temp = [];
+    const temp = [];
     for (const key of Object.keys(tableData[0])) {
       temp.push(key.toLocaleUpperCase());
     }
@@ -32,7 +32,7 @@ function Selection() {
   };
 
   const buildSingleRow = (row) => {
-    let temp = [];
+    const temp = [];
     for (const value of Object.values(row)) {
       temp.push(<td>{value}</td>);
     }
@@ -56,7 +56,7 @@ function Selection() {
   };
 
   const buildRows = () => {
-    let temp = [];
+    const temp = [];
     tableData.forEach((row = {}, index) => {
       temp.push(<tr key={index}>{buildSingleRow(row)}</tr>);
     });
@@ -73,7 +73,7 @@ function Selection() {
   };
 
   const createFinalSelectionData = () => {
-    let temp = {
+    const temp = {
       totalPeopleInvolved: personsList,
       totalBillAmount: getTotalBillAmount(),
       data: [],
