@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function Contri() {
   const [contriData, setContriData] = useState(
@@ -6,7 +6,7 @@ function Contri() {
   );
 
   return (
-    <div
+    <section
       className={"contriPage"}
     >
       <div
@@ -14,33 +14,35 @@ function Contri() {
         style={{
           background: "hsla(0, 0%, 100%, 0.8)",
           backdropFilter: "blur(30px)",
+          marginTop: "-400px",
         }}
       >
         <h3>Individual Contributions</h3>
         <div className={"contriItem"}>
-          {contriData.map((user) => BuildUserShare(user))}
+          {contriData && contriData.map((user, key) => {
+            <div key={key}>{BuildUserShare(user)}</div>
+          })}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
-export const BuildUserShare = (user) => {
+const BuildUserShare = (user, ind) => {
+
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
   let string = `Hi ${user.name}, you purchased ${user.items.join(
     ", "
   )}. Your total share is $${user.share.toFixed(2)}`;
   const sendEmail = () => {
     let url = "http://localhost:3001";
     let endPoint = "/clicknsplit/api/send-email";
-    console.log(string);
+
     let data = {
       email,
       string,
     };
-    setLoading(true);
     fetch(`${url}${endPoint}`, {
       method: "POST",
       headers: {
@@ -49,10 +51,6 @@ export const BuildUserShare = (user) => {
       body: JSON.stringify(data),
     })
       .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-        setLoading(false);
-      });
   };
   return (
     <div className={"personBlock col"}>
@@ -60,8 +58,8 @@ export const BuildUserShare = (user) => {
         <h4>{user.name}</h4>
         {user.items.length ? <h6>Items bought</h6> : ""}
         <div>
-          {user.items.map((item) => (
-            <li>{item}</li>
+          {user.items.map((item, ind) => (
+            <li key={ind}>{item}</li>
           ))}
         </div>
       </div>
