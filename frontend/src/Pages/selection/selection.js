@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { API_BASEURL, SPLIT_BILL } from "../../utils/url"
 
 function Selection() {
   const [tableData, setTableData] = useState([]);
@@ -7,6 +8,7 @@ function Selection() {
   const [currentIndividual, setCurrentIndividual] = useState(null);
   const [selectionData, setSelectionData] = useState({});
   let history = useHistory();
+
   const getTotalBillAmount = () => {
     let total = 0;
     let regexcurrency = /[^0-9.-]/gm;
@@ -86,8 +88,7 @@ function Selection() {
       });
     }
 
-    console.log(temp);
-    fetch("http://localhost:3000/clicknsplit/api/split-bill", {
+    fetch(`${API_BASEURL}${SPLIT_BILL}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(temp),
@@ -96,7 +97,6 @@ function Selection() {
       .then((data) => {
         localStorage.setItem("shares", JSON.stringify(data));
         history.push("/contri");
-        console.log(data);
       });
   };
 
@@ -108,9 +108,7 @@ function Selection() {
     let data = Object.assign({}, selectionData);
     const { name, checked } = e.target;
     const totalValue = value;
-    // const totalValue = e.target.getAttribute("data_total_value") + "hello";
     if (data[name]) {
-      console.log("old");
       if (!checked) {
         //remove
         data[name].people_involved = data[name].people_involved.filter(
@@ -124,13 +122,11 @@ function Selection() {
         ];
       }
     } else {
-      // console.log('new');
       data[name] = {
         people_involved: [currentIndividual],
         price: totalValue,
       };
     }
-    console.log(data);
     setSelectionData(data);
   };
 
@@ -164,7 +160,6 @@ function Selection() {
               </select>
             </div>
             {tableData.length && buildTable()}
-            {/*<Link to={'contri'}>*/}
             <div className="row mt-3">
               <div className="col">
                 <button
@@ -173,7 +168,6 @@ function Selection() {
                 >
                   Done
                 </button>
-                {/*</Link>*/}
               </div>
             </div>
           </div>
