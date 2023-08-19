@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import image from "../../assets/img/bill.jpg";
 
 function Upload(props) {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -61,13 +60,6 @@ function Upload(props) {
 
   return (
     <section className="text-center">
-      <div
-        className="p-5 bg-image img-fluid"
-        style={{
-          backgroundImage: `url(${image})`,
-          height: "500px",
-        }}
-      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{

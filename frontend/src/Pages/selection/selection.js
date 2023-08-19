@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import image from "../../assets/img/bill.jpg";
 import { useHistory } from "react-router";
 
 function Selection(props) {
@@ -160,13 +159,6 @@ function Selection(props) {
     //     {/*</Link>*/}
     // </div>
     <section className="text-center">
-      <div
-        className="p-5 bg-image img-fluid"
-        style={{
-          backgroundImage: `url(${image})`,
-          height: "500px",
-        }}
-      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{

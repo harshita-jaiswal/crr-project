@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import image from "../../assets/img/bill.jpg";
 
 function Contri() {
   const [contriData, setContriData] = useState(
@@ -8,9 +7,6 @@ function Contri() {
 
   return (
     <div
-      style={{
-        backgroundImage: `url(${image})`,
-      }}
       className={"contriPage"}
     >
       <div

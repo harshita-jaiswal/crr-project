@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import image from "../../assets/img/bill.jpg";
+
+
 function TablePage() {
   const [data, setData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -74,13 +75,6 @@ function TablePage() {
     //   </Link>
     // </div>
     <section className="text-center">
-      <div
-        className="p-5 bg-image img-fluid"
-        style={{
-          backgroundImage: `url(${image})`,
-          height: "500px",
-        }}
-      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{

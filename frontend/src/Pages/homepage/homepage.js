@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import image from "../../assets/img/bill.jpg";
-//correct path needs to be put above
+
 
 function Homepage(props) {
   const [numberOfPeople, setNumberOfPeople] = useState(0);
@@ -47,13 +46,6 @@ function Homepage(props) {
   };
   return (
     <section className="text-center">
-      <div
-        className="p-5 bg-image img-fluid"
-        style={{
-          backgroundImage: `url(${image})`,
-          height: "500px",
-        }}
-      ></div>
       <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{
