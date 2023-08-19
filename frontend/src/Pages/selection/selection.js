@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
-function Selection(props) {
+function Selection() {
   const [tableData, setTableData] = useState([]);
   const [personsList, setPersonsList] = useState([]);
   const [currentIndividual, setCurrentIndividual] = useState(null);
@@ -18,7 +18,7 @@ function Selection(props) {
 
   const getColumns = () => {
     let temp = [];
-    for (const [key, value] of Object.entries(tableData[0])) {
+    for (const key of Object.keys(tableData[0])) {
       temp.push(key.toLocaleUpperCase());
     }
     currentIndividual && temp.push("is in?");
@@ -31,7 +31,7 @@ function Selection(props) {
 
   const buildSingleRow = (row) => {
     let temp = [];
-    for (const [key, value] of Object.entries(row)) {
+    for (const value of Object.values(row)) {
       temp.push(<td>{value}</td>);
     }
     currentIndividual &&
@@ -136,7 +136,7 @@ function Selection(props) {
 
   useEffect(() => {
     setTableData(JSON.parse(localStorage.getItem("tableData")));
-    setPersonsList(JSON.parse(localStorage.getItem("personNames")));
+    setPersonsList(JSON.parse(localStorage.getItem("contributorsName")));
   }, []);
 
   return (
