@@ -1,25 +1,17 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { API_BASEURL, SEND_EMAIL } from "../../utils/url";
 
 function Contribution() {
-  const [contributionData, setContriData] = useState(
-    JSON.parse(localStorage.getItem("shares"))
-  );
-
+  const contributionData =JSON.parse(localStorage.getItem("shares"))
   return (
     <section
-      className={"contriPage"}
+      className={"contribution-page"}
     >
       <div
-        className="card shadow-5-strong"
-        style={{
-          background: "hsla(0, 0%, 100%, 0.8)",
-          backdropFilter: "blur(30px)",
-          marginTop: "-400px",
-        }}
+        className="card bg-card shadow-5-strong"
       >
         <h3>Individual Contributions</h3>
-        <div className={"contriItem"}>
+        <div className={"contribution-item"}>
           {contributionData && contributionData.map((user, key) => <div key={key}>{BuildUserShare(user)}</div>)}
         </div>
       </div>
@@ -31,10 +23,9 @@ const BuildUserShare = (user) => {
 
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState("");
-  let message = `Hi ${user.name}, you purchased ${user.items.join(", ")}. Your total share is $${user.share.toFixed(2)}`;
+  const message = `Hi ${user.name}, you purchased ${user.items.join(", ")}. Your total share is $${user.share.toFixed(2)}`;
   const sendEmail = () => {
-
-    let data = {
+    const data = {
       email,
       message,
     };
@@ -45,10 +36,11 @@ const BuildUserShare = (user) => {
       },
       body: JSON.stringify(data),
     })
-      .then((res) => res.json())
+        .then((res) => res.json())
+        .catch(error=>{console.log(error)})
   };
   return (
-    <div className={"personBlock col"}>
+    <div className={"contribution-person-block col"}>
       <div>
         <h4>{user.name}</h4>
         {user.items.length ? <h6>Items bought</h6> : ""}
@@ -59,12 +51,12 @@ const BuildUserShare = (user) => {
         </div>
       </div>
 
-      <p className={"sharePrice"}>
+      <p className={"contribution-share"}>
         Total share - <span>${parseFloat(user.share.toFixed(2))}</span>
       </p>
       {user.items.length && !showEmail ? (
         <button
-          className={"sendEmail"}
+          className={"contribution-send-email"}
           onClick={() => {
             setShowEmail(true);
           }}
@@ -78,8 +70,8 @@ const BuildUserShare = (user) => {
       {showEmail && (
         <div>
           <input
-            className={"emailInput"}
-            placeholder={"enter email"}
+            className={"contribution-email-input"}
+            placeholder={"Enter Email"}
             onChange={(e) => {
               e.preventDefault();
               setEmail(e.target.value);
@@ -87,12 +79,11 @@ const BuildUserShare = (user) => {
             value={email}
             type="email"
           />
-          <button className={"sendEmail"} onClick={sendEmail}>
+          <button className={"contribution-send-email"} onClick={sendEmail}>
             {"Send"}
           </button>
           <button
-            className={"sendEmail"}
-            style={{ width: `60px` }}
+            className={"contribution-cancel-email"}
             onClick={() => {
               setShowEmail(false);
             }}
