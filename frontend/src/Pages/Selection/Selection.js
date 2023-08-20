@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router";
 import {API_BASEURL, SPLIT_BILL} from "../../utils/url"
+import {buildTable} from "../../utils/CommonFunctions";
 
 function Selection() {
     const [tableData, setTableData] = useState([]);
@@ -23,10 +24,9 @@ function Selection() {
         for (const [heading] of Object.entries(tableData[0])) { //keys of any entry object in data array are column headings
             columnHeadings.push(heading.toLocaleUpperCase());
         }
-        currentIndividual && columnHeadings.push("is in?"); //last column, to indicate if user is considered in contribution of the item.
+        currentIndividual && columnHeadings.push("Is In?"); //last column, to indicate if user is considered in contribution of the item.
         return columnHeadings;
     };
-
 
     const buildColumns = () => {
         return getColumnHeadings().map((column, ind) => <th key={ind}>{column}</th>);
@@ -58,17 +58,6 @@ function Selection() {
 
     const buildRows = () => {
         return tableData.map((row, index) => <tr key={index}>{buildSingleRow(row)}</tr>);
-    };
-
-    const buildTable = () => {
-        return (
-            <table>
-                <thead>
-                <tr>{buildColumns()}</tr>
-                </thead>
-                <tbody>{buildRows()}</tbody>
-            </table>
-        );
     };
 
     const uploadSelectionData = (data) => {
@@ -159,7 +148,7 @@ function Selection() {
                                 })}
                             </select>
                         </div>
-                        {tableData.length && buildTable()}
+                        {tableData.length && buildTable(buildColumns(), buildRows())}
                         <div className="row mt-3">
                             <div className="col">
                                 <button
