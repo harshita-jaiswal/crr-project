@@ -3,7 +3,6 @@ var bodyParser = require("body-parser");
 var app = express();
 const cors = require("cors");
 const path = require("path");
-const moment = require("moment-timezone");
 const dotenv = require("dotenv");
 dotenv.config();
 

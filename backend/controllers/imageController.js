@@ -4,7 +4,7 @@ const queueId = process.env.QUEUEID;
 const client = new Butler(apiKey);
 const fs = require("fs");
 var multer = require("multer");
-const upload = multer({ dest: process.env.DEFAULT_IMAGE_PATH });
+// const upload = multer({ dest: process.env.DEFAULT_IMAGE_PATH });
 
 exports.scanReceipt = (req, res) => {
 	let array = [];
@@ -20,15 +20,15 @@ exports.scanReceipt = (req, res) => {
 				//res.send(response);
 				let items = response.tables[0].rows;
 
-				items.forEach((ele, ind) => {
-					ele.cells.forEach((ele1, ind1) => {
+				items.forEach((ele) => {
+					ele.cells.forEach((ele1) => {
 						array.push({ name: ele1.columnName, value: ele1.value });
 					});
 					arrayTemprory.push(array);
 					array = [];
 				});
 
-				arrayTemprory.forEach((ele, ind) => {
+				arrayTemprory.forEach((ele) => {
 					resp.push({
 						name: ele.find((todo) => todo.name == "Item Name").value,
 						quantity: ele.find((todo) => todo.name == "Quantity").value,

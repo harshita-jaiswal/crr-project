@@ -8,14 +8,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 describe("Post request to upload an image", () => {
 	// mocking an environment
+	let env;
 	before(function () {
 		env = process.env;
 		process.env = {
 			APIKEY:
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnb29nbGUtb2F1dGgyfDExMTgxNjkwNDQ0OTMxMDYzOTkxMCIsImVtYWlsIjoic2FtdXNlcjMwMTBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY2NTIwNjAyMzUwMX0.dD2tdk9rTCSjR-AIN5nA4XUQq07IAXA9fvhPl2PiLQM",
+				"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJnb29nbGUtb2F1dGgyfDExMTgxNjkwNDQ0OTMxMDYzOTkxMCIsImVtYWlsIjoic2FtdXNlcjMwMTBAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlhdCI6MTY2NTIwNjAyMzUwMX0.dD2tdk9rTCSjR-AIN5nA4XUQq07IAXA9fvhPl2PiLQM",
 			QUEUEID: "bc490258-dbc2-457d-8a7e-d4c71081bb4e",
 			DEFAULT_IMAGE_PATH: "img/",
-			DEFAULT_IMAGE_PATH: "./uploads",
+			// DEFAULT_IMAGE_PATH: "./uploads",
 		};
 	});
 

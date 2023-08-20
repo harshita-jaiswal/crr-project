@@ -1,53 +1,3 @@
-let requestData = {
-	totalPeopleInvolved: ["Sam", "Ram", "Sham", "Param", "Sharuk"],
-	totalBillAmount: 500,
-	data: [
-		{
-			people_count: 2,
-			price: 15,
-			people_involved: ["Sam", "Sham"],
-			itemName: "Apple",
-		},
-
-		{
-			people_count: 1,
-			price: 20,
-			people_involved: ["Sam"],
-			itemName: "Banana",
-		},
-		{
-			people_count: 2,
-			price: 30,
-			people_involved: ["Sham", "Param", "Sharuk"],
-			itemName: "grapes",
-		},
-		{
-			people_count: 2,
-			price: 30,
-			people_involved: ["Sham", "Param", "Sharuk"],
-			itemName: "watermelon",
-		},
-		{
-			people_count: 2,
-			price: 30,
-			people_involved: ["Sam", "Ram", "Sham"],
-			itemName: "pear",
-		},
-		{
-			people_count: 2,
-			price: 150,
-			people_involved: ["Ram", "Sham", "Param"],
-			itemName: "pineapple",
-		},
-		{
-			people_count: 2,
-			price: 225,
-			people_involved: ["Sham", "Ram"],
-			itemName: "nuts",
-		},
-	],
-};
-
 exports.splitBill = (req, res) => {
 	let requestData = req.body;
 	let items = requestData.data;
@@ -55,7 +5,6 @@ exports.splitBill = (req, res) => {
 	let people = requestData.totalPeopleInvolved;
 
 	let No_of_People = requestData.totalPeopleInvolved.length;
-	let Total_bill_amount = requestData.totalBillAmount;
 	let obj = [];
 	let a = {};
 	for (var i = 0; i < No_of_People; i++) {
