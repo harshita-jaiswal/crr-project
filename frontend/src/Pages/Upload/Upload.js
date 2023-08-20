@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {API_BASEURL, UPLOAD_RECEIPT} from "../../utils/url";
 
-function Upload(props) {
+function Upload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setisLoading] = useState(null);
   const [isUploaded, setUploaded] = useState(false);
@@ -16,11 +17,8 @@ function Upload(props) {
     formData.append("image", selectedFile, selectedFile.name);
 
     console.log(selectedFile);
-    let apiEndpoint = "/clicknsplit/api/upload-receipt";
-    // let url = "https://8b4d-2601-1c0-5280-e430-4536-9046-e759-831a.ngrok.io";
-    let url = "http://localhost:3000";
 
-    fetch(url + apiEndpoint, {
+    fetch(`${API_BASEURL}${UPLOAD_RECEIPT}`, {
       method: "POST",
       body: formData,
     })
@@ -32,7 +30,7 @@ function Upload(props) {
         setUploaded(true);
       })
       .catch((error) => {
-        console.log("error message", error);
+        console.log("Error message", error);
       });
   };
   const fileData = () => {

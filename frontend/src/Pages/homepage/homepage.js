@@ -47,12 +47,7 @@ function Homepage() {
   return (
     <section className="text-center">
       <div
-        className="card mx-4 mx-md-5 shadow-5-strong"
-        style={{
-          marginTop: "-400px",
-          background: "hsla(0, 0%, 100%, 0.8)",
-          backdropFilter: "blur(30px)",
-        }}
+        className="bg-card card mx-4 mx-md-5 shadow-5-strong"
       >
         <div className="card-body py-5 px-md-5">
           <div className="row d-flex justify-content-center">
