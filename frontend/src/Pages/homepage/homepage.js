@@ -52,7 +52,7 @@ function Homepage() {
         <div className="card-body py-5 px-md-5">
           <div className="row d-flex justify-content-center">
             <div className="col-8">
-              Enter number of people involved in the transaction?
+                <label htmlFor="personNumber">Enter number of people involved in the transaction?</label>
             </div>
             <div className="col-4">
               <input type="number" onChange={onCountChange} />
