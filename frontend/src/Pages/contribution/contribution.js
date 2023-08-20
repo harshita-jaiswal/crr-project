@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { API_BASEURL, SEND_EMAIL } from "../../utils/url";
 
-function Contri() {
-  const [contriData, setContriData] = useState(
+function Contribution() {
+  const [contributionData, setContriData] = useState(
     JSON.parse(localStorage.getItem("shares"))
   );
 
@@ -20,7 +20,7 @@ function Contri() {
       >
         <h3>Individual Contributions</h3>
         <div className={"contriItem"}>
-          {contriData && contriData.map((user, key) => <div key={key}>{BuildUserShare(user)}</div>)}
+          {contributionData && contributionData.map((user, key) => <div key={key}>{BuildUserShare(user)}</div>)}
         </div>
       </div>
     </section>
@@ -105,4 +105,4 @@ const BuildUserShare = (user) => {
   );
 };
 
-export default Contri;
+export default Contribution;

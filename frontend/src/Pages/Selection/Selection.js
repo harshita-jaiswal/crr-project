@@ -96,7 +96,7 @@ function Selection() {
       .then((data) => data.json())
       .then((data) => {
         localStorage.setItem("shares", JSON.stringify(data));
-        history.push("/contri");
+        history.push("/contributions");
       });
   };
 
