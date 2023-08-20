@@ -13,35 +13,36 @@ function Selection() {
         let total = 0;
         const currency = /[^0-9.-]/gm;
         tableData.forEach((item) => {
-            total = total + parseInt(item["value"].replace(currency, ""), 10);
+            total = total + parseInt(item["value"].replace(currency, ""), 10); // price strings in data are with $
         });
         return total;
     };
 
-    const getColumns = () => {
-        const temp = [];
-        for (const key of Object.keys(tableData[0])) {
-            temp.push(key.toLocaleUpperCase());
+    const getColumnHeadings = () => {
+        let columnHeadings = [];
+        for (const [heading] of Object.entries(tableData[0])) { //keys of any entry object in data array are column headings
+            columnHeadings.push(heading.toLocaleUpperCase());
         }
-        currentIndividual && temp.push("is in?");
-        return temp;
+        currentIndividual && columnHeadings.push("is in?"); //last column, to indicate if user is considered in contribution of the item.
+        return columnHeadings;
     };
 
+
     const buildColumns = () => {
-        return getColumns().map((column, ind) => <th key={ind}>{column}</th>);
+        return getColumnHeadings().map((column, ind) => <th key={ind}>{column}</th>);
     };
 
     const buildSingleRow = (row) => {
-        const temp = [];
+        const singleRow = [];
         for (const value of Object.values(row)) {
-            temp.push(<td>{value}</td>);
+            singleRow.push(<td>{value}</td>);
         }
-        currentIndividual &&
-        temp.push(
+        currentIndividual && //add tick box for 'is in?' column
+        singleRow.push(
             <td>
                 <input
                     onChange={(e) => onCheckboxChange(e, row.value)}
-                    id={`${row.name}${currentIndividual}`}
+                    id={`${row.name}${currentIndividual}`}  //kind of unique id to store and retrieve from object
                     name={row.name}
                     checked={
                         !!selectionData?.[`${row.name}`]?.people_involved.includes(
@@ -52,46 +53,29 @@ function Selection() {
                 />
             </td>
         );
-        return temp;
+        return singleRow;
     };
 
     const buildRows = () => {
-        const temp = [];
-        tableData.forEach((row = {}, index) => {
-            temp.push(<tr key={index}>{buildSingleRow(row)}</tr>);
-        });
-        return temp;
+        return tableData.map((row, index) => <tr key={index}>{buildSingleRow(row)}</tr>);
     };
 
     const buildTable = () => {
         return (
             <table>
+                <thead>
                 <tr>{buildColumns()}</tr>
+                </thead>
                 <tbody>{buildRows()}</tbody>
             </table>
         );
     };
 
-    const createFinalSelectionData = () => {
-        const temp = {
-            totalPeopleInvolved: personsList,
-            totalBillAmount: getTotalBillAmount(),
-            data: [],
-        };
-
-        for (const [itemName, itemSelectionData] of Object.entries(selectionData)) {
-            temp.data.push({
-                itemName,
-                people_involved: itemSelectionData["people_involved"],
-                price: itemSelectionData["price"],
-                people_count: itemSelectionData["people_involved"].length,
-            });
-        }
-
+    const uploadSelectionData = (data) => {
         fetch(`${API_BASEURL}${SPLIT_BILL}`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(temp),
+            body: JSON.stringify(data),
         })
             .then((data) => data.json())
             .then((data) => {
@@ -100,6 +84,26 @@ function Selection() {
             }).catch(error => {
             console.log("Error message", error);
         })
+    }
+
+    //needs to transform data in the format backend will accept
+    const transformSelectionData = () => {
+        const backendFormat = {
+            totalPeopleInvolved: personsList,
+            totalBillAmount: getTotalBillAmount(),
+            data: [],
+        };
+
+        for (const [itemName, itemSelectionData] of Object.entries(selectionData)) {
+            backendFormat.data.push({
+                itemName,
+                people_involved: itemSelectionData["people_involved"],
+                price: itemSelectionData["price"],
+                people_count: itemSelectionData["people_involved"].length,
+            });
+        }
+
+        uploadSelectionData(backendFormat)
     };
 
     const onIndividualChange = (e) => {
@@ -139,12 +143,7 @@ function Selection() {
     return (
         <section className="text-center">
             <div
-                className="card mx-4 mx-md-5 shadow-5-strong"
-                style={{
-                    marginTop: "-450px",
-                    background: "hsla(0, 0%, 100%, 0.8)",
-                    backdropFilter: "blur(30px)",
-                }}
+                className="card bg-card mx-4 mx-md-5 shadow-5-strong"
             >
                 <div className="card-body py-5 px-md-5">
                     <div className="row d-flex justify-content-center">
@@ -165,7 +164,7 @@ function Selection() {
                             <div className="col">
                                 <button
                                     className="btn btn-info btn-sml"
-                                    onClick={createFinalSelectionData}
+                                    onClick={transformSelectionData}
                                 >
                                     Done
                                 </button>
