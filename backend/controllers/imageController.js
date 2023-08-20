@@ -4,7 +4,6 @@ const queueId = process.env.QUEUEID;
 const client = new Butler(apiKey);
 const fs = require("fs");
 var multer = require("multer");
-// const upload = multer({ dest: process.env.DEFAULT_IMAGE_PATH });
 
 exports.scanReceipt = (req, res) => {
 	let array = [];
