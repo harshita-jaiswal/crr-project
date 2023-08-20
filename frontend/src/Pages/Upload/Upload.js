@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
-import image from "../../img/bill.jpg";
-import {URL} from "../../utils";
-function Upload(props) {
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {API_BASEURL, UPLOAD_RECEIPT} from "../../utils/url";
+
+function Upload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setisLoading] = useState(null);
   const [isUploaded, setUploaded] = useState(false);
@@ -17,9 +17,8 @@ function Upload(props) {
     formData.append("image", selectedFile, selectedFile.name);
 
     console.log(selectedFile);
-    let apiEndpoint = "/clicknsplit/api/upload-receipt";
 
-    fetch(URL + apiEndpoint, {
+    fetch(`${API_BASEURL}${UPLOAD_RECEIPT}`, {
       method: "POST",
       body: formData,
     })
@@ -31,7 +30,7 @@ function Upload(props) {
         setUploaded(true);
       })
       .catch((error) => {
-        console.log("error message", error);
+        console.log("Error message", error);
       });
   };
   const fileData = () => {
@@ -60,20 +59,15 @@ function Upload(props) {
   return (
     <section className="text-center">
       <div
-        className="p-5 bg-image img-fluid"
-        style={{
-          backgroundImage: `url(${image})`,
-          height: "500px",
-        }}></div>
-      <div
         className="card mx-4 mx-md-5 shadow-5-strong"
         style={{
           marginTop: "-400px",
           background: "hsla(0, 0%, 100%, 0.8)",
           backdropFilter: "blur(30px)",
-        }}>
+        }}
+      >
         <div className="card-body py-5 px-md-5">
-          <div class="row d-flex justify-content-center">
+          <div className="row d-flex justify-content-center">
             <header className="row">
               <h1 className="App">Upload the picture of the bill</h1>
             </header>

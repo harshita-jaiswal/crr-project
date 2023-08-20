@@ -16,18 +16,18 @@ td {
 .buttonTable a{
   margin: 0 10px;
 }
-.userName{
+.user-name{
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.userName h4{
+.user-name h4{
   margin-bottom: 0;
 }
 .buttonTable a {
   margin: 0 10px;
 }
-.personBlock {
+.contribution-person-block {
   min-width: 420px;
   max-width: 420px;
   text-transform: capitalize;
@@ -40,34 +40,45 @@ td {
   justify-content: center;
   align-items: center;
 }
-.contriPage {
+.contribution-page {
   padding: 48px;
 }
-.contriPage>div{
+.bg-card{
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(30px);
+  margin-top: -400px;
+}
+.contribution-page>div{
   padding: 20px 10px;
 }
-.sharePrice {
+.contribution-share {
   margin-top: 8px;
   margin-bottom: 0;
 }
-.contriItem {
+.contribution-item {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.sharePrice {
+.contribution-share {
   background: #0dcaf0;
   font-weight: bold;
   border-radius: 12px;
   padding: 0 8px;
 }
-.sendEmail{
+.contribution-send-email{
   width: 100px;
   border-radius: 16px;
   border: 1px solid;
   margin: 10px 6px;
 }
-.emailInput{
+.contribution-cancel-email{
+  width: 60px;
+  border-radius: 16px;
+  border: 1px solid;
+  margin: 10px 6px;
+}
+.contribution-email-input{
   border-radius: 4px;
   padding: 0 4px;
   margin-right: 10px;
