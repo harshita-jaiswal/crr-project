@@ -3,6 +3,12 @@ import {useHistory} from "react-router";
 import {API_BASEURL, SPLIT_BILL} from "../../utils/url"
 import {buildTable} from "../../utils/CommonFunctions";
 
+/**
+ * Renders page where users can individually select item they contributed.
+ * This contribution data is sent to backend.
+ * @return {JSX.Element}
+ * @constructor
+ */
 function Selection() {
     const [tableData, setTableData] = useState([]);
     const [personsList, setPersonsList] = useState([]);

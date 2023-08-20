@@ -12,14 +12,14 @@ function Contribution() {
       >
         <h3>Individual Contributions</h3>
         <div className={"contribution-item"}>
-          {contributionData && contributionData.map((user, key) => <div key={key}>{BuildUserShare(user)}</div>)}
+          {contributionData && contributionData.map((user, key) => <div key={key}>{buildUserShareCard(user)}</div>)}
         </div>
       </div>
     </section>
   );
 }
 
-const BuildUserShare = (user) => {
+const buildUserShareCard = (user) => {
 
   const [showEmail, setShowEmail] = useState(false);
   const [email, setEmail] = useState("");

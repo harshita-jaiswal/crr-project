@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {API_BASEURL, UPLOAD_RECEIPT} from "../../utils/url";
 
+/**
+ * This page renders upload screen where user can upload photo of their receipt.
+ * After receiving JSON of receipt, it is store in localstorage
+ * @return {JSX.Element}
+ * @constructor
+ */
 function Upload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [loading, setisLoading] = useState(null);
