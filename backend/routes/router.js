@@ -10,9 +10,9 @@ let uploadImage = multer({ storage: imageController.imageStorage });
 router.get("/scan-receipt", imageController.scanReceipt);
 
 router.post(
-  "/upload-receipt",
-  uploadImage.single("image"),
-  imageController.scanReceipt
+	"/upload-receipt",
+	uploadImage.single("image"),
+	imageController.scanReceipt
 );
 
 router.post("/split-bill", splitController.splitBill);
