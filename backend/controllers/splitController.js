@@ -22,7 +22,6 @@ exports.splitBill = (req, res) => {
 
 	const result = Object.values(sharedItems);
 
-	console.log(result);
 	res.status(200).send(result);
 };
 

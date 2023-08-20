@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {API_BASEURL, UPLOAD_RECEIPT} from "../../utils/url";
+import { API_BASEURL, UPLOAD_RECEIPT } from "../../utils/url";
 
 /**
  * This page renders upload screen where user can upload photo of their receipt.
@@ -22,15 +22,12 @@ function Upload() {
     setisLoading(true);
     formData.append("image", selectedFile, selectedFile.name);
 
-    console.log(selectedFile);
-
     fetch(`${API_BASEURL}${UPLOAD_RECEIPT}`, {
       method: "POST",
       body: formData,
     })
       .then((res) => res.json())
       .then((response) => {
-        console.log("Request successful", response);
         localStorage.setItem("tableData", JSON.stringify(response));
         setisLoading(false);
         setUploaded(true);

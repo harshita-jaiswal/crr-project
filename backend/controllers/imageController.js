@@ -32,15 +32,12 @@ function processExtractedData(data) {
 exports.scanReceipt = (req, res) => {
 	if (req.file.path && typeof req.file.path !== undefined) {
 		const fileStream = fs.createReadStream(req.file.path);
-		console.log(queueId);
 		client.extractDocument(queueId, fileStream)
 			.then((response) => {
-				console.log(response);
 				const items = response.tables[0].rows;
 
 				const responseArray = processExtractedData(items, queueId);
 
-				console.log(responseArray);
 				res.status(200).send(responseArray);
 			})
 			.catch((error) => {
@@ -52,7 +49,6 @@ exports.scanReceipt = (req, res) => {
 };
 
 exports.uploadReceipt = (req, res) => {
-	console.log(req.body);
 	res.send("Image has been uploaded here: " + req.file.path);
 };
 
